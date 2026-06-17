@@ -1,0 +1,20 @@
+# Entorno virtual
+venv/
+.venv/
+
+# Python
+__pycache__/
+*.pyc
+
+# Variables de entorno
+.env
+
+# Archivos temporales
+*.log
+
+# VS Code
+.vscode/
+
+# Uploads
+uploads/*
+!uploads/.gitkeep
