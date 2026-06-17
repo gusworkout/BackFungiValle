@@ -20,12 +20,12 @@ UPLOAD_DIR = BASE_DIR / "uploads" / "hongos"
 UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
 
 # Cargar modelo al iniciar
-MODELO_PATH = MODELOS_DIR / "modelo_finetuned.keras"
+MODELO_PATH = MODELOS_DIR / "modelo_finetuned.h5"
 CLASS_PATH = MODELOS_DIR / "class_names.json"
 
 print("🔄 Cargando modelo de hongos...")
 try:
-    model = tf.keras.models.load_model(MODELO_PATH)
+    model = tf.keras.models.load_model(MODELO_PATH, compile=False)
     print(f"✅ Modelo cargado: {MODELO_PATH}")
 except Exception as e:
     print(f"❌ Error cargando modelo: {e}")
