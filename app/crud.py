@@ -1,3 +1,5 @@
+from zoneinfo import ZoneInfo
+
 from sqlalchemy.orm import Session
 from sqlalchemy import desc
 from sqlalchemy import and_
@@ -96,7 +98,7 @@ def create_fungi_finding(db: Session, finding: schemas.FungiFindingCreate, user_
         location_name=finding.location_name,
         user_notes=finding.user_notes,
         image_url=image_url,
-        date_found=datetime.utcnow()
+        date_found=datetime.now(ZoneInfo("America/Bogota"))
     )
     
     db.add(db_finding)
