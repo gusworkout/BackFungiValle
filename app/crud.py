@@ -98,7 +98,7 @@ def create_fungi_finding(db: Session, finding: schemas.FungiFindingCreate, user_
         location_name=finding.location_name,
         user_notes=finding.user_notes,
         image_url=image_url,
-        date_found=datetime.now(ZoneInfo("America/Bogota"))
+        date_found=datetime.now(ZoneInfo("America/Bogota")).replace(tzinfo=None)
     )
     
     db.add(db_finding)
