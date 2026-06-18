@@ -18,6 +18,10 @@ import subprocess
 import sys
 import importlib
 import app.routes.hongos as hongos_module
+from zoneinfo import ZoneInfo
+
+def colombia_now():
+    return datetime.now(ZoneInfo("America/Bogota")).replace(tzinfo=None)
 
 router = APIRouter()
 
@@ -102,8 +106,8 @@ async def guardar_hallazgo(
             longitude=longitude,
             image_url=image_url,
             embedding=json.dumps(embedding),
-            date_found=datetime.now(),
-            created_at=datetime.now()
+            date_found=colombia_now(),
+            created_at=colombia_now()
         )
         
         db.add(new_finding)
