@@ -67,7 +67,7 @@ class FungiSpecies(Base):
     edible = Column(String(20))
     toxicity_level = Column(String(20))
     image_url = Column(String(255))
-    created_at = Column(DateTime, default=datetime.utcnow)
+    created_at = Column(DateTime, default=colombia_now)
     
     # Relaciones
     findings = relationship("FungiFinding", back_populates="species")
