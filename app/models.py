@@ -1,6 +1,7 @@
 # app/models.py
 
 from sqlalchemy import Column, Integer, String, Text, DateTime, ForeignKey, Float, Boolean
+
 #from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 from datetime import datetime
@@ -9,7 +10,10 @@ from typing import Optional
 from app.database import Base
 # UN SOLO BASE - IMPORTANTE
 #Base = declarative_base()
+from zoneinfo import ZoneInfo
 
+def colombia_now():
+    return datetime.now(ZoneInfo("America/Bogota")).replace(tzinfo=None)
 
 # ========== MODELOS DE LA BASE DE DATOS ==========
 
@@ -85,8 +89,8 @@ class FungiFinding(Base):
     image_url = Column(String(500))
     embedding = Column(Text)
     is_verified = Column(Integer, default=0)
-    date_found = Column(DateTime, default=datetime.now)
-    created_at = Column(DateTime, default=datetime.now)
+    date_found = Column(DateTime, default=colombia_now)
+    created_at = Column(DateTime, default=colombia_now)
     
     # Relaciones
     user = relationship("User", back_populates="findings")
@@ -100,7 +104,7 @@ class ImageEmbedding(Base):
     finding_id = Column(Integer, ForeignKey("fungi_findings.id"), nullable=False)
     embedding = Column(Text)
     species_name = Column(String(150))
-    created_at = Column(DateTime, default=datetime.now)
+    created_at = Column(DateTime, default=colombia_now)
     
     # Relaciones
     finding = relationship("FungiFinding", backref="embedding_ref", uselist=False)
@@ -112,8 +116,8 @@ class UserSpecies(Base):
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String(150), unique=True)
     vote_count = Column(Integer, default=1)
-    first_seen_at = Column(DateTime, default=datetime.now)
-    last_seen_at = Column(DateTime, default=datetime.now)
+    first_seen_at = Column(DateTime, default=colombia_now)
+    last_seen_at = Column(DateTime, default=colombia_now)
     status = Column(String(20), default="pending")
 
 
